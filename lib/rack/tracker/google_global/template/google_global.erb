@@ -1,6 +1,6 @@
 <% if trackers.any? %>
-<script async src='https://www.googletagmanager.com/gtag/js?id=<%= trackers[0][:id] %>'></script>
-<script>
+<script async src='https://www.googletagmanager.com/gtag/js?id=<%= trackers[0][:id] %>' nonce="<%= env["action_dispatch.content_security_policy_nonce"] %>"></script>
+<script nonce="<%= env["action_dispatch.content_security_policy_nonce"] %>">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments)};
   gtag('js', new Date());
