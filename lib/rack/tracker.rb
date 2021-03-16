@@ -8,6 +8,7 @@ require "active_support/inflector"
 require "rack/tracker/version"
 require "rack/tracker/extensions"
 require "rack/tracker/javascript_helper"
+require "rack/tracker/csp_helper"
 require 'rack/tracker/railtie' if defined?(Rails)
 require "rack/tracker/handler"
 require "rack/tracker/handler_delegator"

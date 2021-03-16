@@ -1,4 +1,4 @@
-<script type="text/javascript" nonce="<%= env["action_dispatch.content_security_policy_nonce"] %>">
+<script type="text/javascript" <%= nonce_property %> >
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};

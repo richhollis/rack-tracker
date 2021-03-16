@@ -21,6 +21,7 @@ class Rack::Tracker::Handler
 
   # Allow javascript escaping in view templates
   include Rack::Tracker::JavaScriptHelper
+  include Rack::Tracker::CspHelper
 
   def initialize(env, options = {})
     self.env = env
@@ -69,7 +70,7 @@ class Rack::Tracker::Handler
     @_tracker_options ||= {}.tap do |tracker_options|
       options.slice(*allowed_tracker_options).each do |key, value|
         option_value = value.respond_to?(:call) ? value.call(env) : value
-        unless option_value.nil? 
+        unless option_value.nil?
           tracker_options[tracker_option_key(key)] = tracker_option_value(option_value)
         end
       end

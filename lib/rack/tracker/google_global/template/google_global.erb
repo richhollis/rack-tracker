@@ -1,23 +1,23 @@
 <% if trackers.any? %>
-<script async src='https://www.googletagmanager.com/gtag/js?id=<%= trackers[0][:id] %>' nonce="<%= env["action_dispatch.content_security_policy_nonce"] %>"></script>
-<script nonce="<%= env["action_dispatch.content_security_policy_nonce"] %>">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments)};
-  gtag('js', new Date());
+  <script async src='https://www.googletagmanager.com/gtag/js?id=<%= trackers[0][:id] %>' <%= nonce_property %> ></script>
+  <script <%= nonce_property %> >
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)};
+    gtag('js', new Date());
 
-  <% if set_options %>
-    gtag('set', <%= set_options.to_json %>);
-  <% end %>
-
-  <% trackers.each do |tracker| %>
-    <% pages.each do |page| %>
-      gtag('config', '<%= tracker[:id] %>', <%= tracker_options.merge(page.params).to_json %>);
+    <% if set_options %>
+      gtag('set', <%= set_options.to_json %>);
     <% end %>
-    gtag('config', '<%= tracker[:id] %>', <%= tracker_options.to_json %>);
-  <% end %>
 
-  <% events.each do |event| %>
-    gtag('event', '<%= event.action %>', <%= event.params.to_json %>);
-  <% end %>
-</script>
+    <% trackers.each do |tracker| %>
+      <% pages.each do |page| %>
+        gtag('config', '<%= tracker[:id] %>', <%= tracker_options.merge(page.params).to_json %>);
+      <% end %>
+      gtag('config', '<%= tracker[:id] %>', <%= tracker_options.to_json %>);
+    <% end %>
+
+    <% events.each do |event| %>
+      gtag('event', '<%= event.action %>', <%= event.params.to_json %>);
+    <% end %>
+  </script>
 <% end %>
