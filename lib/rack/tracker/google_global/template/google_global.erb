@@ -1,5 +1,7 @@
 <% if trackers.any? %>
-  <script async src='https://www.googletagmanager.com/gtag/js?id=<%= trackers[0][:id] %>' <%= nonce_property %> ></script>
+  <% unless options[:suppress_loader] %>
+    <script async src='https://www.googletagmanager.com/gtag/js?id=<%= trackers[0][:id] %>' <%= nonce_property %> ></script>
+  <% end %>
   <script <%= nonce_property %> >
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments)};
