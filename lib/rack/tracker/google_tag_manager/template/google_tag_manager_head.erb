@@ -1,14 +1,14 @@
 <% if container %>
   <% unless options[:turbolinks] %>
     <% if events.any? %>
-      <script>
+      <script <%= nonce_property %> >
         dataLayer = [];
         dataLayer.push(<%= events.map(&:write).join(', ') %>);
       </script>
     <% end %>
   <% end %>
 
-  <script>
+  <script <%= nonce_property %> >
     <% if options[:turbolinks] %>
       document.addEventListener('turbolinks:load', function(event) {
         var url = event.data.url;
